@@ -1,0 +1,2 @@
+# jq_mistore_pc
+基于jQuery和es6仿小米官网首页和详情页
