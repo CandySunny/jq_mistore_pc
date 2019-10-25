@@ -1,15 +1,13 @@
-import '../scss/common.scss';
 import { Header } from '../components/header';
+import { App } from './App';
 
-class Index {
-    constructor() {
-        this.$app = $('<div id="app">');
-
-        this.init();
-    }
-
-    init() {
-        this.render();
+class Index extends App {
+    constructor($) {
+        super($, {
+            swiper: true,
+            phone: true,
+            field: true
+        });
     }
 
     render() {
