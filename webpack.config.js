@@ -7,7 +7,9 @@ const miniCssExtractPlugin = require('mini-css-extract-plugin');
 const config = {
     mode: 'development',//production
     entry: {
-        index: path.resolve(__dirname, './src/js/index.js')
+        index: path.resolve(__dirname, './src/js/Index.js'),
+        list: path.resolve(__dirname, './src/js/List.js'),
+        detail: path.resolve(__dirname, './src/js/Detail.js')
     },
     output: {
         path: path.resolve(__dirname + '/dist'),
@@ -30,6 +32,7 @@ const config = {
             {
                 test: /\.scss$/,
                 use: [
+                    // 单独提取css文件
                     // {
                     //     loader: miniCssExtractPlugin.loader,
                     //     options: {
@@ -73,8 +76,35 @@ const config = {
             chunks: ['index'],
             excludeChunks: ['node-modules'],
             hash: true
-        })       
+        }),
+        new htmlWebpackPlugin({
+            minify: {
+                removeComments: true,//删除所有注释
+                collapseWhitespace: true//删除所有空格换行
+            },
+            filename: 'list.html',//打包后的文件名称
+            template: path.resolve(__dirname, 'src/list.html'),//模板文件
+            title: 'mistore',
+            chunksSortMode: 'manual',
+            chunks: ['list'],
+            excludeChunks: ['node-modules'],
+            hash: true
+        }),
+        new htmlWebpackPlugin({
+            minify: {
+                removeComments: true,//删除所有注释
+                collapseWhitespace: true//删除所有空格换行
+            },
+            filename: 'detail.html',//打包后的文件名称
+            template: path.resolve(__dirname, 'src/detail.html'),//模板文件
+            title: 'mistore',
+            chunksSortMode: 'manual',
+            chunks: ['detail'],
+            excludeChunks: ['node-modules'],
+            hash: true
+        })               
 
+        // 单独提取css文件，指定提取的css文件存放路径
         // new miniCssExtractPlugin({
         //     filename: 'css/[name].css'
         // })
