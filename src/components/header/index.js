@@ -4,6 +4,7 @@ import './index.scss';
 import { Logo } from './logo';
 import { Nav } from './nav';
 import tools from '../../utils/tools';
+import { Search } from './search';
 
 class Header {
     constructor(el, fieldDatas, phoneDatas) {
@@ -15,6 +16,7 @@ class Header {
 
         this.logo = new Logo();
         this.nav = new Nav();
+        this.search = new Search();
     }
 
     async init() {
@@ -25,13 +27,17 @@ class Header {
     async render() {
         await this.$el.append(tools.tplReplace(tpl(), {
             logo: this.logo.tpl(),
-            nav: this.nav.tpl(this.fieldDatas)
+            nav: this.nav.tpl(this.fieldDatas),
+            search: this.search.tpl()
         }));
     }
 
     bindEvent () {
-        const $nav = $('.J_nav');
+        const $nav = $('.J_nav'),
+              $searchBtn = $('.J_searchBtn');
+
         $nav.on('mouseenter', '.nav-item', {phoneDatas: this.phoneDatas, oNav: this.nav}, this.nav.navMouseIn);
+        $searchBtn.on('click', this.search.searchPhone);
     }
 }
 

@@ -2,5 +2,6 @@
     <div class="container">
         {{logo}}
         {{nav}}
+        {{search}}
     </div>
 </header>
