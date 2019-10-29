@@ -25,7 +25,7 @@ class App {
             phone: this.phone,
             field: this.field
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             this.cache = {
                 phoneDatas: res.phone_data,
                 fieldDatas: res.field_data,
