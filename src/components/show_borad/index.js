@@ -1,6 +1,9 @@
 import tpl from './tpl/board.tpl';
 import itemTpl from './tpl/item.tpl';
 import './index.scss';
+
+import { NoDataTip } from '../no_data_tip';
+
 import tools from '../../utils/tools';
 
 class ShowBoard {
@@ -16,14 +19,14 @@ class ShowBoard {
 
     render() {
         this.$el.append(tools.tplReplace(tpl(), {
-            list: this.setList()
+            list: this.setList(this.phoneDatas) ||new NoDataTip().tpl
         }));
     }
 
-    setList (){
+    setList (datas){
         let list = '';
 
-        this.phoneDatas.forEach((item, index)=>{
+        datas.forEach((item, index)=>{
             list += tools.tplReplace(itemTpl(), {
                 id: item.id,
                 isFirst: index % 5 === 0 ? 'first' : '',
